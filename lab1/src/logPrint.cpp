@@ -33,6 +33,7 @@ class Table {
 
   public:
     void placeSquares() {
+        std::cout << "Начинаем поиск минимального количества квадратов..." << std::endl;
         setGridRatio();
         int startX = gridSize / 2;
         int startY = (gridSize + 1) / 2;
@@ -41,9 +42,11 @@ class Table {
                                        Square(startY, 0, startX)};
 
         backtrack(squares, occupiedArea, 3, startX, startY);
+        std::cout << "Минимальное количество квадратов: " << bestCount << std::endl;
     }
 
     void printResult() {
+        std::cout << "Лучшее решение:" << std::endl;
         std::cout << bestCount << std::endl;
         for (const auto &square : bestSolution) {
             std::cout << square.x * squareSize + 1 << " " << square.y * squareSize + 1 << " "
@@ -60,18 +63,28 @@ class Table {
             if (currentCount < bestCount) {
                 bestCount = currentCount;
                 bestSolution = currentSquares;
+                std::cout << "Найдено новое лучшее решение с " << bestCount << " квадратами."
+                          << std::endl;
             }
             return;
         }
 
         for (int x = startX; x < gridSize; ++x) {
             for (int y = startY; y < gridSize; ++y) {
-                if (isOverlap(currentSquares, x, y))
+                std::cout << "Попытка разместить квадраты в позиции (" << x << ", " << y << ")..."
+                          << std::endl;
+                if (isOverlap(currentSquares, x, y)) {
+                    std::cout << "Квадрат размером не может быть размещен в позиции (" << x << ", "
+                              << y << ")" << std::endl;
                     continue;
+                }
 
                 int maxSize = findMaxSizeSquare(currentSquares, x, y);
-                if (maxSize <= 0)
+                if (maxSize <= 0) {
+                    std::cout << "Квадрат размером не может быть размещен в позиции (" << x << ", "
+                              << y << ")" << std::endl;
                     continue;
+                }
 
                 for (int size = maxSize; size >= 1; --size) {
                     int newOccupiedArea = occupiedArea + size * size;
@@ -87,11 +100,15 @@ class Table {
                         }
                     }
 
+                    std::cout << "Размещаем квадрат размером " << size << "x" << size
+                              << " в позиции (" << x << ", " << y << ")..." << std::endl;
                     currentSquares.emplace_back(x, y, size);
                     if (newOccupiedArea == gridSize * gridSize) {
                         if (currentCount + 1 < bestCount) {
                             bestCount = currentCount + 1;
                             bestSolution = currentSquares;
+                            std::cout << "Найдено новое лучшее решение с " << bestCount
+                                      << " квадратами." << std::endl;
                         }
                         currentSquares.pop_back();
                         continue;
@@ -101,6 +118,8 @@ class Table {
                         backtrack(currentSquares, newOccupiedArea, currentCount + 1, x, y);
                     }
                     currentSquares.pop_back();
+                    std::cout << "Убираем квадрат размером " << size << "x" << size
+                              << " из позиции (" << x << ", " << y << ")" << std::endl;
                 }
                 return;
             }
