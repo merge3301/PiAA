@@ -56,7 +56,7 @@ class LittleAlgorithm:
         current_cost: int,
         i_index: list[int],
         j_index: list[int],
-    ) -> None:
+    ):
         for i in range(len(self.matrix_handler)):
             for j in range(len(self.matrix_handler)):
                 if self.matrix_handler[i][j] == inf:
@@ -76,7 +76,7 @@ class LittleAlgorithm:
         j_index: list[int],
         parent_node: str = None,
         branching_arc: tuple[int, int] = None,
-    ) -> None:
+    ):
         self.matrix_handler.matrix = matrix
         print("Матрица на текущем шаге")
         self.matrix_handler.print_matrix()

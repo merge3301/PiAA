@@ -1,5 +1,4 @@
 import time
-import math
 import matplotlib.pyplot as plt  # type: ignore
 from MatrixCreator import MatrixCreator
 from ADO_MOD_algorithm import ADO_MOD_algorithm

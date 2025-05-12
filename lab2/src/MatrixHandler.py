@@ -18,7 +18,7 @@ class MatrixHandler:
         for row in self.matrix:
             print(row)
 
-    def min_except(self, lst: int, idx: int) -> list:
+    def min_except(self, lst, idx: int) -> list:
         return min([x for i, x in enumerate(lst) if i != idx])
 
     def reduct(self) -> int:
@@ -28,9 +28,7 @@ class MatrixHandler:
             min_row = min(row)
             if min_row == math.inf:
                 return -1
-            # вычитаем из всех элементов строки минимальный
             self.matrix[i] = [elem - min_row for elem in row]
-            # добавляем к стоимости d
             d += min_row
 
         # Редукция столбцов
@@ -39,13 +37,11 @@ class MatrixHandler:
             if min_column == math.inf:
                 return -1
             for row in self.matrix:
-                # вычитаем из всех элементов столбца минимальный
                 row[i] -= min_column
-            # добавляем к стоимости d
             d += min_column
         return d
 
-    def find_heavy_zero(self) -> int:
+    def find_heavy_zero(self):
         d_max = 0
         res = None
         for i in range(len(self.matrix)):
@@ -62,16 +58,14 @@ class MatrixHandler:
         return res
 
     def find_longest_path(self, solution: dict, edge: tuple) -> list:
-        start, end = edge
+        start = edge
         path = []
 
-        # Ищем путь в одну сторону
         current = start
         while current in solution.keys():
             path.append(solution[current])
             current = solution[current]
 
-        # Ищем путь в другую сторону
         current = start
         path.insert(0, current)
         while current in solution.values():
@@ -99,7 +93,7 @@ class MatrixHandler:
 
     def delete_row_column(
         self, i: int, j: int, solution: dict, i_index: list, j_index: list
-    ) -> None:
+    ):
         # находим, каким вершинам графа соответствуют эти индексы
         restore_i = i_index[i]
         restore_j = j_index[j]
