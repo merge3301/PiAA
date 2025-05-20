@@ -182,7 +182,8 @@ def get_patterns() -> dict:
 def main():
     text = get_text()
     patterns = get_patterns()
-    # patterns = {"her": 1, "she": 2, "his": 3,"is":4,"i":5,"he":6}
+    # text = "abcsheabche"
+    # patterns = {"her": 1, "she": 2, "his": 3, "is": 4, "i": 5, "he": 6}
     trie = Trie(patterns)
     result = trie.Aho_Corasick(text)
     print("\n".join(result))
