@@ -97,8 +97,8 @@ def kmp_search(text, pattern, verbose=False):
 def main():
     # Считываем строки строго в порядке ввода:
     # первая строка - A, вторая строка - B.
-    A = A1
-    B = B1
+    A = input()
+    B = input()
 
     verbose = False  # Установите в True для вывода шагов
 

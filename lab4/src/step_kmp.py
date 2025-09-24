@@ -51,6 +51,6 @@ if __name__ == "__main__":
 
     verbose = False
 
-    result = kmp_search(text, pattern, verbose)
+    result = kmp_search(text, pattern)
 
     print(",".join(map(str, result)) if result else -1)

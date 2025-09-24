@@ -1,5 +1,5 @@
-DEBUG = False  # Общий режим отладки
-DEBUG_VERBOSE = True  # Выводить матрицу после каждой итерации
+DEBUG = True  # Общий режим отладки
+DEBUG_VERBOSE = False  # Выводить матрицу после каждой итерации
 
 
 def print_matrix(matrix, s1, s2):
